@@ -11,14 +11,19 @@ import ColorPicker
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var colorPicker: ColorPicker!
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
-//        let colorPicker = ColorPicker(frame: CGRect(x: 0, y: 0, width: 200, height: 200))
-//        colorPicker.center = view.center
-//        view.addSubview(colorPicker)
-//
-//        print("displayed")
+        colorPicker.delegate = self
+    }
+}
+
+extension ViewController: ColorPickerViewDelegate {
+
+    func colorPicker(_ colorPicker: ColorPicker, didSelect color: UIColor) {
+        print(color)
     }
 }
 

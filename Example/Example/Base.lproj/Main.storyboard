@@ -24,11 +24,6 @@
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="4tR-fw-jC2" secondAttribute="height" multiplier="1:1" id="sAH-yp-f5y"/>
                                 </constraints>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="wheelBorderWidth">
-                                        <real key="value" value="1"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -39,6 +34,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <connections>
+                        <outlet property="colorPicker" destination="4tR-fw-jC2" id="aSw-md-MWV"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
