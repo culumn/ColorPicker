@@ -15,7 +15,6 @@ public class ColorPicker: UIView {
     private var selectedHSB = HSB(hue: 0, saturation: 0, brightness: 1, alpha: 1)
     public weak var delegate: ColorPickerViewDelegate?
 
-    let colorWheelLayer = CALayer()
     private lazy var indicatorLayer: CALayer = {
         let diameter = indicatorDiameter
 
@@ -74,19 +73,10 @@ public class ColorPicker: UIView {
 
     private func commonInit() {
         // configure color wheel layer
-        colorWheelLayer.frame = CGRect(x: 0, y: 0, width: frame.width, height: frame.height)
-        colorWheelLayer.contents = createHSColorWheelImage(size: frame.size)
-        colorWheelLayer.borderWidth = colorWheelBorderWidth
-        colorWheelLayer.borderColor = colorWheelBorderColor?.cgColor
-        colorWheelLayer.cornerRadius = min(colorWheelLayer.frame.width, colorWheelLayer.frame.height) / 2
-        colorWheelLayer.masksToBounds = true
-        layer.addSublayer(colorWheelLayer)
-
-//        layer.contents = createHSColorWheelImage(size: frame.size)
-//        layer.borderWidth = colorWheelBorderWidth
-//        layer.borderColor = colorWheelBorderColor?.cgColor
-//        layer.cornerRadius = min(frame.width, frame.height) / 2
-//        layer.masksToBounds = true
+        layer.contents = createHSColorWheelImage(size: frame.size)
+        layer.borderWidth = colorWheelBorderWidth
+        layer.borderColor = colorWheelBorderColor?.cgColor
+        layer.cornerRadius = min(frame.width, frame.height) / 2
 
         // configure indicator layer
         indicatorLayer.borderWidth = indicatorBorderWidth
@@ -96,7 +86,7 @@ public class ColorPicker: UIView {
 
     public func setBrightness(_ brightness: CGFloat) {
         selectedHSB.brightness = brightness
-        colorWheelLayer.contents = createHSColorWheelImage(size: frame.size)
+        layer.contents = createHSColorWheelImage(size: frame.size)
 
         let selectedColor = UIColor(
             hue: selectedHSB.hue,
@@ -162,7 +152,7 @@ extension ColorPicker {
 
     func createHSColorWheelImage(size: CGSize) -> CGImage {
         // Creates a bitmap of the Hue Saturation colorWheel
-        let colorWheelDiameter = Int(colorWheelLayer.frame.width)
+        let colorWheelDiameter = Int(frame.width)
         let bufferLength = Int(colorWheelDiameter * colorWheelDiameter * 4)
 
         let bitmapData: CFMutableData = CFDataCreateMutable(nil, 0)
@@ -218,7 +208,7 @@ extension ColorPicker {
 
     func getHSValue(at point: CGPoint, hue: inout CGFloat, saturation: inout CGFloat) {
         // Get hue and saturation for a given point (x,y) in the colorWheel
-        let colorWheelRadius = colorWheelLayer.frame.width / 2
+        let colorWheelRadius = frame.width / 2
         let dx = CGFloat(point.x - colorWheelRadius) / colorWheelRadius
         let dy = CGFloat(point.y - colorWheelRadius) / colorWheelRadius
         let d = sqrt(dx * dx + dy * dy)
