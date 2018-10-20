@@ -7,11 +7,11 @@
 //
 
 func convertHSBToRGB(_ hsb: HSB) -> RGB {
-    // Converts HSV to a RGB color
+    // Converts HSB to a RGB color
     var rgb = RGB(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.0)
-    var r: CGFloat
-    var g: CGFloat
-    var b: CGFloat
+    var red: CGFloat
+    var green: CGFloat
+    var blue: CGFloat
 
     let i = Int(hsb.hue * 6)
     let f = hsb.hue * 6 - CGFloat(i)
@@ -20,76 +20,77 @@ func convertHSBToRGB(_ hsb: HSB) -> RGB {
     let t = hsb.brightness * (1 - (1 - f) * hsb.saturation)
     switch (i % 6) {
     case 0:
-        r = hsb.brightness
-        g = t; b = p
+        red = hsb.brightness
+        green = t
+        blue = p
     case 1:
-        r = q
-        g = hsb.brightness
-        b = p
+        red = q
+        green = hsb.brightness
+        blue = p
     case 2:
-        r = p
-        g = hsb.brightness
-        b = t
+        red = p
+        green = hsb.brightness
+        blue = t
     case 3:
-        r = p
-        g = q
-        b = hsb.brightness
+        red = p
+        green = q
+        blue = hsb.brightness
     case 4:
-        r = t
-        g = p
-        b = hsb.brightness
+        red = t
+        green = p
+        blue = hsb.brightness
     case 5:
-        r = hsb.brightness
-        g = p
-        b = q
+        red = hsb.brightness
+        green = p
+        blue = q
     default:
-        r = hsb.brightness
-        g = t
-        b = p
+        red = hsb.brightness
+        green = t
+        blue = p
     }
 
-    rgb.red = r
-    rgb.green = g
-    rgb.blue = b
+    rgb.red = red
+    rgb.green = green
+    rgb.blue = blue
     rgb.alpha = hsb.alpha
     return rgb
 }
 
 func convertRGBToHSB(_ rgb: RGB) -> HSB {
-    // Converts RGB to a HSV color
+    // Converts RGB to a HSB color
     var hsb = HSB(hue: 0.0, saturation: 0.0, brightness: 0.0, alpha: 0.0)
 
-    let rd: CGFloat = rgb.red
-    let gd: CGFloat = rgb.green
-    let bd: CGFloat = rgb.blue
+    let rd = rgb.red
+    let gd = rgb.green
+    let bd = rgb.blue
 
-    let maxV: CGFloat = max(rd, max(gd, bd))
-    let minV: CGFloat = min(rd, min(gd, bd))
-    var h: CGFloat = 0
-    var s: CGFloat = 0
-    let b: CGFloat = maxV
+    let maxV = max(rd, max(gd, bd))
+    let minV = min(rd, min(gd, bd))
+    var hue = CGFloat(0)
+    var saturation = CGFloat(0)
+    let brightness = maxV
 
-    let d: CGFloat = maxV - minV
+    let d = maxV - minV
 
-    s = maxV == 0 ? 0 : d / minV;
+    saturation = maxV == 0 ? 0 : d / minV;
 
     if (maxV == minV) {
-        h = 0
+        hue = 0
     } else {
         if (maxV == rd) {
-            h = (gd - bd) / d + (gd < bd ? 6 : 0)
+            hue = (gd - bd) / d + (gd < bd ? 6 : 0)
         } else if (maxV == gd) {
-            h = (bd - rd) / d + 2
+            hue = (bd - rd) / d + 2
         } else if (maxV == bd) {
-            h = (rd - gd) / d + 4
+            hue = (rd - gd) / d + 4
         }
 
-        h /= 6;
+        hue /= 6
     }
 
-    hsb.hue = h
-    hsb.saturation = s
-    hsb.brightness = b
+    hsb.hue = hue
+    hsb.saturation = saturation
+    hsb.brightness = brightness
     hsb.alpha = rgb.alpha
     return hsb
 }
