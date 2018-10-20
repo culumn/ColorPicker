@@ -47,7 +47,7 @@ public class ColorPicker: UIView {
         }
     }
 
-    @IBInspectable public var indicatorBorderWidth = CGFloat(1) {
+    @IBInspectable public var indicatorBorderWidth: CGFloat = 1 {
         didSet {
             indicatorLayer.borderWidth = indicatorBorderWidth
         }
