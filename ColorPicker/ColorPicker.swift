@@ -21,16 +21,35 @@ public class ColorPicker: UIView {
 
     public weak var delegate: ColorPickerViewDelegate?
 
+    @IBInspectable public var wheelBorderWidth: CGFloat = 0.0 {
+        didSet {
+            layer.borderWidth = wheelBorderWidth
+        }
+    }
+
+    @IBInspectable public var wheelBorderColor: UIColor? {
+        didSet {
+            layer.borderColor = wheelBorderColor?.cgColor
+        }
+    }
+
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-
-        layer.contents = createColorWheelImage(size: frame.size)
+        commonInit()
     }
 
     public override init(frame: CGRect) {
         super.init(frame: frame)
+        commonInit()
+    }
 
+    func commonInit() {
+        // configure layer
         layer.contents = createColorWheelImage(size: frame.size)
+        layer.borderWidth = wheelBorderWidth
+        layer.borderColor = wheelBorderColor?.cgColor
+        layer.cornerRadius = min(frame.width, frame.height) / 2
+        layer.masksToBounds = true
     }
 
     func createColorWheelImage(size: CGSize) -> CGImage {
