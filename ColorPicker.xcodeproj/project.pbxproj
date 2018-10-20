@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		9668C54C217AE63C0021FC09 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9668C54B217AE63C0021FC09 /* Util.swift */; };
+		9668C54E217B0DCD0021FC09 /* ColorPickerViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9668C54D217B0DCD0021FC09 /* ColorPickerViewDelegate.swift */; };
 		966E578E217A0A2C009CBABF /* ColorPicker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 966E5784217A0A2B009CBABF /* ColorPicker.framework */; };
 		966E5793217A0A2C009CBABF /* ColorPickerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966E5792217A0A2C009CBABF /* ColorPickerTests.swift */; };
 		966E5795217A0A2C009CBABF /* ColorPicker.h in Headers */ = {isa = PBXBuildFile; fileRef = 966E5787217A0A2B009CBABF /* ColorPicker.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -28,6 +29,7 @@
 
 /* Begin PBXFileReference section */
 		9668C54B217AE63C0021FC09 /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
+		9668C54D217B0DCD0021FC09 /* ColorPickerViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerViewDelegate.swift; sourceTree = "<group>"; };
 		966E5784217A0A2B009CBABF /* ColorPicker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ColorPicker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		966E5787217A0A2B009CBABF /* ColorPicker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ColorPicker.h; sourceTree = "<group>"; };
 		966E5788217A0A2B009CBABF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -84,6 +86,7 @@
 				966E57C0217A12EC009CBABF /* RGB.swift */,
 				966E57C2217A12F3009CBABF /* HSB.swift */,
 				966E57C7217A1437009CBABF /* ColorPicker.swift */,
+				9668C54D217B0DCD0021FC09 /* ColorPickerViewDelegate.swift */,
 				9668C54B217AE63C0021FC09 /* Util.swift */,
 			);
 			path = ColorPicker;
@@ -209,6 +212,7 @@
 			files = (
 				966E57C8217A1437009CBABF /* ColorPicker.swift in Sources */,
 				966E57C1217A12EC009CBABF /* RGB.swift in Sources */,
+				9668C54E217B0DCD0021FC09 /* ColorPickerViewDelegate.swift in Sources */,
 				966E57C3217A12F3009CBABF /* HSB.swift in Sources */,
 				9668C54C217AE63C0021FC09 /* Util.swift in Sources */,
 			);

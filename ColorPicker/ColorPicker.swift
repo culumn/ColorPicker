@@ -8,12 +8,6 @@
 
 import Foundation
 
-public protocol ColorPickerViewDelegate: class {
-    func colorPicker(
-        _ colorPicker: ColorPicker,
-        didSelect color: UIColor)
-}
-
 @IBDesignable
 public class ColorPicker: UIView {
 
@@ -76,6 +70,24 @@ public class ColorPicker: UIView {
         commonInit()
     }
 
+    func commonInit() {
+        // configure layer
+        layer.contents = createHSColorWheelImage(size: frame.size)
+        layer.borderWidth = colorWheelBorderWidth
+        layer.borderColor = colorWheelBorderColor?.cgColor
+        layer.cornerRadius = min(frame.width, frame.height) / 2
+        layer.masksToBounds = true
+
+        // configure indicator layer
+        indicatorLayer.borderWidth = indicatorBorderWidth
+        indicatorLayer.borderColor = indicatorBorderColor?.cgColor
+        layer.addSublayer(indicatorLayer)
+    }
+}
+
+// MARK: - Touch Action
+extension ColorPicker {
+
     public override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesBegan(touches, with: event)
         guard let position = touches.first?.location(in: self) else { return }
@@ -119,20 +131,6 @@ public class ColorPicker: UIView {
         )
         indicatorLayer.backgroundColor = selectedColor.cgColor
         delegate?.colorPicker(self, didSelect: selectedColor)
-    }
-
-    func commonInit() {
-        // configure layer
-        layer.contents = createHSColorWheelImage(size: frame.size)
-        layer.borderWidth = colorWheelBorderWidth
-        layer.borderColor = colorWheelBorderColor?.cgColor
-        layer.cornerRadius = min(frame.width, frame.height) / 2
-        layer.masksToBounds = true
-
-        // configure indicator layer
-        indicatorLayer.borderWidth = indicatorBorderWidth
-        indicatorLayer.borderColor = indicatorBorderColor?.cgColor
-        layer.addSublayer(indicatorLayer)
     }
 }
 
