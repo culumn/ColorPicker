@@ -17,9 +17,26 @@ public protocol ColorPickerViewDelegate: class {
 @IBDesignable
 public class ColorPicker: UIView {
 
-    let scale: CGFloat = UIScreen.main.scale
+    private let scale = UIScreen.main.scale
 
+    var brightness: CGFloat = 0
     public weak var delegate: ColorPickerViewDelegate?
+
+    private lazy var indicatorLayer: CALayer = {
+        let dimension: CGFloat = 33
+        let edgeColor = UIColor(white: 0.9, alpha: 0.8)
+
+        let indicatorLayer = CALayer()
+        indicatorLayer.cornerRadius = dimension / 2
+        indicatorLayer.backgroundColor = UIColor.white.cgColor
+        indicatorLayer.bounds = CGRect(x: 0, y: 0, width: dimension, height: dimension)
+        indicatorLayer.position = CGPoint(x: bounds.width / 2, y: bounds.height / 2)
+        indicatorLayer.shadowColor = UIColor.black.cgColor
+        indicatorLayer.shadowOffset = .zero
+        indicatorLayer.shadowRadius = 1
+        indicatorLayer.shadowOpacity = 0.5
+        return indicatorLayer
+    }()
 
     @IBInspectable public var wheelBorderWidth: CGFloat = 0.0 {
         didSet {
@@ -33,6 +50,18 @@ public class ColorPicker: UIView {
         }
     }
 
+    @IBInspectable public var indicatorBorderWidth = CGFloat(1) {
+        didSet {
+            indicatorLayer.borderWidth = indicatorBorderWidth
+        }
+    }
+
+    @IBInspectable public var indicatorBorderColor: UIColor? = UIColor(white: 0.9, alpha: 0.8) {
+        didSet {
+            indicatorLayer.borderColor = indicatorBorderColor?.cgColor
+        }
+    }
+
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         commonInit()
@@ -43,16 +72,30 @@ public class ColorPicker: UIView {
         commonInit()
     }
 
+    public override func prepareForInterfaceBuilder() {
+        super.prepareForInterfaceBuilder()
+        commonInit()
+    }
+
     func commonInit() {
         // configure layer
-        layer.contents = createColorWheelImage(size: frame.size)
+        layer.contents = createHSWheelImage(size: frame.size)
         layer.borderWidth = wheelBorderWidth
         layer.borderColor = wheelBorderColor?.cgColor
         layer.cornerRadius = min(frame.width, frame.height) / 2
         layer.masksToBounds = true
-    }
 
-    func createColorWheelImage(size: CGSize) -> CGImage {
+        // configure indicator layer
+        indicatorLayer.borderWidth = indicatorBorderWidth
+        indicatorLayer.borderColor = indicatorBorderColor?.cgColor
+        layer.addSublayer(indicatorLayer)
+    }
+}
+
+// MARK: - Helpers
+extension ColorPicker {
+
+    func createHSWheelImage(size: CGSize) -> CGImage {
         // Creates a bitmap of the Hue Saturation wheel
         let originalWidth: CGFloat = size.width
         let originalHeight: CGFloat = size.height
@@ -135,5 +178,4 @@ public class ColorPicker: UIView {
         }
         return (hue, saturation)
     }
-
 }
