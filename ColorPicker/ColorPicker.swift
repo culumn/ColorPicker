@@ -21,12 +21,12 @@ public class ColorPicker: UIView {
     public weak var delegate: ColorPickerViewDelegate?
 
     private lazy var indicatorLayer: CALayer = {
-        let radius = CGFloat(40)
+        let diameter = indicatorDiameter
 
         let indicatorLayer = CALayer()
-        indicatorLayer.cornerRadius = radius / 2
+        indicatorLayer.cornerRadius = diameter / 2
         indicatorLayer.backgroundColor = UIColor.white.cgColor
-        indicatorLayer.bounds = CGRect(x: 0, y: 0, width: radius, height: radius)
+        indicatorLayer.bounds = CGRect(x: 0, y: 0, width: diameter, height: diameter)
         indicatorLayer.position = CGPoint(x: frame.width / 2, y: frame.height / 2)
         indicatorLayer.shadowColor = UIColor.black.cgColor
         indicatorLayer.shadowOffset = .zero
@@ -56,6 +56,13 @@ public class ColorPicker: UIView {
     @IBInspectable public var indicatorBorderColor: UIColor? = UIColor(white: 0.9, alpha: 0.8) {
         didSet {
             indicatorLayer.borderColor = indicatorBorderColor?.cgColor
+        }
+    }
+
+    @IBInspectable public var indicatorDiameter: CGFloat = 40 {
+        didSet {
+            indicatorLayer.bounds.size = CGSize(width: indicatorDiameter, height: indicatorDiameter)
+            indicatorLayer.cornerRadius = indicatorDiameter / 2
         }
     }
 
