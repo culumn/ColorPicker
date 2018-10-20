@@ -19,17 +19,17 @@ public class ColorPicker: UIView {
 
     private let scale = UIScreen.main.scale
 
-    var brightness: CGFloat = 0
+    var hsb = HSB(hue: 1, saturation: 1, brightness: 1, alpha: 1)
     public weak var delegate: ColorPickerViewDelegate?
 
     private lazy var indicatorLayer: CALayer = {
-        let dimension: CGFloat = 33
+        let radius = CGFloat(40)
         let edgeColor = UIColor(white: 0.9, alpha: 0.8)
 
         let indicatorLayer = CALayer()
-        indicatorLayer.cornerRadius = dimension / 2
+        indicatorLayer.cornerRadius = radius / 2
         indicatorLayer.backgroundColor = UIColor.white.cgColor
-        indicatorLayer.bounds = CGRect(x: 0, y: 0, width: dimension, height: dimension)
+        indicatorLayer.bounds = CGRect(x: 0, y: 0, width: radius, height: radius)
         indicatorLayer.position = CGPoint(x: bounds.width / 2, y: bounds.height / 2)
         indicatorLayer.shadowColor = UIColor.black.cgColor
         indicatorLayer.shadowOffset = .zero
@@ -75,6 +75,36 @@ public class ColorPicker: UIView {
     public override func prepareForInterfaceBuilder() {
         super.prepareForInterfaceBuilder()
         commonInit()
+    }
+
+    public override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        guard let position = touches.first?.location(in: self) else { return }
+        didTouch(at: position)
+    }
+
+    public override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesMoved(touches, with: event)
+        guard let position = touches.first?.location(in: self) else { return }
+        didTouch(at: position)
+    }
+
+    public override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesEnded(touches, with: event)
+        guard let position = touches.first?.location(in: self) else { return }
+        didTouch(at: position)
+    }
+
+    func didTouch(at point: CGPoint) {
+        let wheelRadius = bounds.width / 2
+
+        let dx = Double(wheelRadius - point.x)
+        let dy = Double(wheelRadius - point.y)
+        let distance = CGFloat(sqrt(dx * dx + dy * dy))
+
+        // Check drag distance and move indicator
+        guard distance < wheelRadius else { return }
+        indicatorLayer.position = point
     }
 
     func commonInit() {
