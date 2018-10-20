@@ -95,6 +95,7 @@ public class ColorPicker: UIView {
         layer.contents = createHSColorWheelImage(size: frame.size)
         let selecgedPoint = getPointFromHS(hue: selectedHSB.hue, saturation: selectedHSB.saturation)
         indicatorLayer.position = selecgedPoint
+        indicatorLayer.backgroundColor = selectedHSB.color.cgColor
     }
 }
 
@@ -130,7 +131,6 @@ extension ColorPicker {
         guard distance < colorWheelRadius else { return }
         indicatorLayer.position = point
 
-        // MARK: Research exclusive memory access
         var hue = CGFloat()
         var saturation = CGFloat()
         getHSValue(at: point, hue: &hue, saturation: &saturation)
@@ -225,10 +225,10 @@ extension ColorPicker {
     }
 
     func getPointFromHS(hue: CGFloat, saturation: CGFloat) -> CGPoint {
-        let colorWheelDiameter = min(frame.width, frame.height)
+        let colorWheelDiameter = frame.width
         let radius = saturation * colorWheelDiameter / 2
-        let x = colorWheelDiameter / 2 + radius * cos(hue * .pi * 2) + 20
-        let y = colorWheelDiameter / 2 + radius * sin(hue * .pi * 2) + 20
+        let x = colorWheelDiameter / 2 + radius * cos(hue * .pi * 2)
+        let y = colorWheelDiameter / 2 + radius * sin(hue * .pi * 2)
         return CGPoint(x: x, y: y)
     }
 }

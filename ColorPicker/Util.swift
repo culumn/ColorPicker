@@ -83,23 +83,3 @@ func convertRGBToHSB(_ rgb: RGB) -> HSB {
 
     return HSB(hue: hue, saturation: saturation, brightness: brightness, alpha: rgb.alpha)
 }
-
-extension UIColor {
-
-    var hsb: HSB {
-        var hue = CGFloat()
-        var saturation = CGFloat()
-        var brightness = CGFloat()
-        var alpha = CGFloat()
-
-        getHue(&hue, saturation: &saturation, brightness: &brightness, alpha: &alpha)
-        return HSB(hue: hue, saturation: saturation, brightness: brightness, alpha: alpha)
-    }
-}
-
-extension HSB {
-
-    var color: UIColor {
-        return UIColor(hue: hue, saturation: saturation, brightness: brightness, alpha: alpha)
-    }
-}

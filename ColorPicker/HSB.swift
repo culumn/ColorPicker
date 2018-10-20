@@ -24,4 +24,8 @@ public struct HSB {
         self.brightness = brightness
         self.alpha = alpha
     }
+
+    public var color: UIColor {
+        return UIColor(hue: hue, saturation: saturation, brightness: brightness, alpha: alpha)
+    }
 }

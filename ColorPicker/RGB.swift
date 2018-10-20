@@ -24,4 +24,8 @@ public struct RGB {
         self.blue = blue
         self.alpha = alpha
     }
+
+    public var color: UIColor {
+        return UIColor(red: red, green: green, blue: blue, alpha: alpha)
+    }
 }
