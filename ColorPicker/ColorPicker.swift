@@ -101,8 +101,8 @@ public class ColorPicker: UIView {
         var hue = CGFloat()
         var saturation = CGFloat()
         getHSValue(at: point, hue: &hue, saturation: &saturation)
-        let selectedColor = UIColor(hue: hue, saturation: saturation, brightness: 1, alpha: 1).cgColor
-        indicatorLayer.backgroundColor = selectedColor
+        let selectedColor = UIColor(hue: hue, saturation: saturation, brightness: 1, alpha: 1)
+        indicatorLayer.backgroundColor = selectedColor.cgColor
         delegate?.colorPicker(self, didSelect: selectedColor)
     }
 
