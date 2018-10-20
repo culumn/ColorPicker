@@ -8,7 +8,6 @@
 
 func convertHSBToRGB(_ hsb: HSB) -> RGB {
     // Converts HSB to a RGB color
-    var rgb = RGB(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.0)
     var red: CGFloat
     var green: CGFloat
     var blue: CGFloat
@@ -49,17 +48,11 @@ func convertHSBToRGB(_ hsb: HSB) -> RGB {
         blue = p
     }
 
-    rgb.red = red
-    rgb.green = green
-    rgb.blue = blue
-    rgb.alpha = hsb.alpha
-    return rgb
+    return RGB(red: red, green: green, blue: blue, alpha: hsb.alpha)
 }
 
 func convertRGBToHSB(_ rgb: RGB) -> HSB {
     // Converts RGB to a HSB color
-    var hsb = HSB(hue: 0.0, saturation: 0.0, brightness: 0.0, alpha: 0.0)
-
     let rd = rgb.red
     let gd = rgb.green
     let bd = rgb.blue
@@ -88,9 +81,5 @@ func convertRGBToHSB(_ rgb: RGB) -> HSB {
         hue /= 6
     }
 
-    hsb.hue = hue
-    hsb.saturation = saturation
-    hsb.brightness = brightness
-    hsb.alpha = rgb.alpha
-    return hsb
+    return HSB(hue: hue, saturation: saturation, brightness: brightness, alpha: rgb.alpha)
 }

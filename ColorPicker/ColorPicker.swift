@@ -145,19 +145,19 @@ extension ColorPicker {
                 let color = getHSValue(at: point)
                 let hue = color.hue
                 let saturation = color.saturation
-                var a: CGFloat = 0.0
-                if (saturation < 1.0) {
+                var alpha = CGFloat(0.0)
+                if saturation < 1.0 {
                     // Antialias the edge of the circle.
-                    if (saturation > 0.99) {
-                        a = (1.0 - saturation) * 100
+                    if saturation > 0.99 {
+                        alpha = (1.0 - saturation) * 100
                     } else {
-                        a = 1.0;
+                        alpha = 1.0;
                     }
 
                     hsb.hue = hue
                     hsb.saturation = saturation
                     hsb.brightness = 1.0
-                    hsb.alpha = a
+                    hsb.alpha = alpha
                     rgb = convertHSBToRGB(hsb)
                 }
                 let offset = Int(4 * (x + y * dimension))
@@ -193,7 +193,7 @@ extension ColorPicker {
         let c = frame.width * scale / 2
         let dx = CGFloat(point.x - c) / c
         let dy = CGFloat(point.y - c) / c
-        let d = sqrt(CGFloat (dx * dx + dy * dy))
+        let d = sqrt(dx * dx + dy * dy)
 
         let saturation = d
 
@@ -201,7 +201,7 @@ extension ColorPicker {
         if (d == 0) {
             hue = 0
         } else {
-            hue = acos(dx/d) / CGFloat.pi / 2.0
+            hue = acos(dx/d) / .pi / 2.0
             if (dy < 0) {
                 hue = 1.0 - hue
             }
