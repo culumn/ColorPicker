@@ -96,8 +96,8 @@ public class ColorPicker: UIView {
         }
 
         // Convert the bitmap to a CGImage
-        let colorSpace: CGColorSpace? = CGColorSpaceCreateDeviceRGB()
-        let dataProvider: CGDataProvider? = CGDataProvider(data: bitmapData)
+        let colorSpace = CGColorSpaceCreateDeviceRGB()
+        let dataProvider = CGDataProvider(data: bitmapData)
         let bitmapInfo = CGBitmapInfo(rawValue: CGBitmapInfo().rawValue | CGImageAlphaInfo.last.rawValue)
         let imageRef = CGImage(
             width: Int(dimension),
@@ -105,7 +105,7 @@ public class ColorPicker: UIView {
             bitsPerComponent: 8,
             bitsPerPixel: 32,
             bytesPerRow: Int(dimension) * 4,
-            space: colorSpace!,
+            space: colorSpace,
             bitmapInfo: bitmapInfo,
             provider: dataProvider!,
             decode: nil,
