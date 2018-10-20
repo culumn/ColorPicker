@@ -72,13 +72,13 @@ public class ColorPicker: UIView {
     }
 
     private func commonInit() {
-        // configure color wheel layer
+        // Configure color wheel layer
         layer.contents = createHSColorWheelImage(size: frame.size)
         layer.borderWidth = colorWheelBorderWidth
         layer.borderColor = colorWheelBorderColor?.cgColor
         layer.cornerRadius = min(frame.width, frame.height) / 2
 
-        // configure indicator layer
+        // Configure indicator layer
         indicatorLayer.borderWidth = indicatorBorderWidth
         indicatorLayer.borderColor = indicatorBorderColor?.cgColor
         layer.addSublayer(indicatorLayer)
@@ -87,14 +87,14 @@ public class ColorPicker: UIView {
     public func setBrightness(_ brightness: CGFloat) {
         selectedHSB.brightness = brightness
         layer.contents = createHSColorWheelImage(size: frame.size)
+        updateSelectedColor()
+    }
 
-        let selectedColor = UIColor(
-            hue: selectedHSB.hue,
-            saturation: selectedHSB.saturation,
-            brightness: selectedHSB.brightness,
-            alpha: selectedHSB.alpha
-        )
-        indicatorLayer.backgroundColor = selectedColor.cgColor
+    public func setColor(_ color: UIColor) {
+        selectedHSB = color.hsb
+        layer.contents = createHSColorWheelImage(size: frame.size)
+        let selecgedPoint = getPointFromHS(hue: selectedHSB.hue, saturation: selectedHSB.saturation)
+        indicatorLayer.position = selecgedPoint
     }
 }
 
@@ -136,12 +136,11 @@ extension ColorPicker {
         getHSValue(at: point, hue: &hue, saturation: &saturation)
         selectedHSB.hue = hue
         selectedHSB.saturation = saturation
-        let selectedColor = UIColor(
-            hue: selectedHSB.hue,
-            saturation: selectedHSB.saturation,
-            brightness: selectedHSB.brightness,
-            alpha: selectedHSB.alpha
-        )
+        updateSelectedColor()
+    }
+
+    func updateSelectedColor() {
+        let selectedColor = selectedHSB.color
         indicatorLayer.backgroundColor = selectedColor.cgColor
         delegate?.colorPicker(self, didSelect: selectedColor)
     }
@@ -223,5 +222,13 @@ extension ColorPicker {
                 hue = 1.0 - hue
             }
         }
+    }
+
+    func getPointFromHS(hue: CGFloat, saturation: CGFloat) -> CGPoint {
+        let colorWheelDiameter = min(frame.width, frame.height)
+        let radius = saturation * colorWheelDiameter / 2
+        let x = colorWheelDiameter / 2 + radius * cos(hue * .pi * 2) + 20
+        let y = colorWheelDiameter / 2 + radius * sin(hue * .pi * 2) + 20
+        return CGPoint(x: x, y: y)
     }
 }
