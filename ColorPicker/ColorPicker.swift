@@ -11,9 +11,11 @@ import Foundation
 @IBDesignable
 public class ColorPicker: UIView {
 
-    private var selectedHSB = HSB(hue: 1, saturation: 1, brightness: 1, alpha: 1)
+    // Init hsb for white color
+    private var selectedHSB = HSB(hue: 0, saturation: 0, brightness: 1, alpha: 1)
     public weak var delegate: ColorPickerViewDelegate?
 
+    let colorWheelLayer = CALayer()
     private lazy var indicatorLayer: CALayer = {
         let diameter = indicatorDiameter
 
@@ -70,18 +72,39 @@ public class ColorPicker: UIView {
         commonInit()
     }
 
-    func commonInit() {
-        // configure layer
-        layer.contents = createHSColorWheelImage(size: frame.size)
-        layer.borderWidth = colorWheelBorderWidth
-        layer.borderColor = colorWheelBorderColor?.cgColor
-        layer.cornerRadius = min(frame.width, frame.height) / 2
-        layer.masksToBounds = true
+    private func commonInit() {
+        // configure color wheel layer
+        colorWheelLayer.frame = CGRect(x: 0, y: 0, width: frame.width, height: frame.height)
+        colorWheelLayer.contents = createHSColorWheelImage(size: frame.size)
+        colorWheelLayer.borderWidth = colorWheelBorderWidth
+        colorWheelLayer.borderColor = colorWheelBorderColor?.cgColor
+        colorWheelLayer.cornerRadius = min(colorWheelLayer.frame.width, colorWheelLayer.frame.height) / 2
+        colorWheelLayer.masksToBounds = true
+        layer.addSublayer(colorWheelLayer)
+
+//        layer.contents = createHSColorWheelImage(size: frame.size)
+//        layer.borderWidth = colorWheelBorderWidth
+//        layer.borderColor = colorWheelBorderColor?.cgColor
+//        layer.cornerRadius = min(frame.width, frame.height) / 2
+//        layer.masksToBounds = true
 
         // configure indicator layer
         indicatorLayer.borderWidth = indicatorBorderWidth
         indicatorLayer.borderColor = indicatorBorderColor?.cgColor
         layer.addSublayer(indicatorLayer)
+    }
+
+    public func setBrightness(_ brightness: CGFloat) {
+        selectedHSB.brightness = brightness
+        colorWheelLayer.contents = createHSColorWheelImage(size: frame.size)
+
+        let selectedColor = UIColor(
+            hue: selectedHSB.hue,
+            saturation: selectedHSB.saturation,
+            brightness: selectedHSB.brightness,
+            alpha: selectedHSB.alpha
+        )
+        indicatorLayer.backgroundColor = selectedColor.cgColor
     }
 }
 
@@ -139,18 +162,18 @@ extension ColorPicker {
 
     func createHSColorWheelImage(size: CGSize) -> CGImage {
         // Creates a bitmap of the Hue Saturation colorWheel
-        let colorWheelDiameter = frame.width
-        let bufferLength: Int = Int(colorWheelDiameter * colorWheelDiameter * 4)
+        let colorWheelDiameter = Int(colorWheelLayer.frame.width)
+        let bufferLength = Int(colorWheelDiameter * colorWheelDiameter * 4)
 
         let bitmapData: CFMutableData = CFDataCreateMutable(nil, 0)
         CFDataSetLength(bitmapData, CFIndex(bufferLength))
         let bitmap = CFDataGetMutableBytePtr(bitmapData)
 
-        for y in stride(from: CGFloat(0), to: colorWheelDiameter, by: CGFloat(1)) {
-            for x in stride(from: CGFloat(0), to: colorWheelDiameter, by: CGFloat(1)) {
+        for y in 0 ..< colorWheelDiameter {
+            for x in 0 ..< colorWheelDiameter {
                 var hue: CGFloat = 0
                 var saturation: CGFloat = 0
-                var alpha: CGFloat = 0.0
+                var alpha: CGFloat = 0
                 var rgb = RGB(red: 0, green: 0, blue: 0, alpha: 0)
 
                 let point = CGPoint(x: x, y: y)
@@ -195,7 +218,7 @@ extension ColorPicker {
 
     func getHSValue(at point: CGPoint, hue: inout CGFloat, saturation: inout CGFloat) {
         // Get hue and saturation for a given point (x,y) in the colorWheel
-        let colorWheelRadius = frame.width / 2
+        let colorWheelRadius = colorWheelLayer.frame.width / 2
         let dx = CGFloat(point.x - colorWheelRadius) / colorWheelRadius
         let dy = CGFloat(point.y - colorWheelRadius) / colorWheelRadius
         let d = sqrt(dx * dx + dy * dy)

@@ -22,29 +22,35 @@
                                 <rect key="frame" x="32" y="188" width="311" height="311"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
+                                    <constraint firstAttribute="width" constant="300" id="BlO-xm-mEu"/>
                                     <constraint firstAttribute="width" secondItem="4tR-fw-jC2" secondAttribute="height" multiplier="1:1" id="sAH-yp-f5y"/>
                                 </constraints>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="indicatorBorderColor">
-                                        <color key="value" cocoaTouchSystemColor="darkTextColor"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
                             </view>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="Bim-qs-W3J">
+                                <rect key="frame" x="82" y="619" width="118" height="30"/>
+                                <connections>
+                                    <action selector="didChangeSliderValue:" destination="BYZ-38-t0r" eventType="valueChanged" id="CU4-t4-KeH"/>
+                                </connections>
+                            </slider>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="4tR-fw-jC2" secondAttribute="trailing" constant="32" id="VVc-Vh-HmE"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Bim-qs-W3J" secondAttribute="trailing" constant="32" id="NL9-HW-fgB"/>
                             <constraint firstItem="4tR-fw-jC2" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="YuW-vv-ujs"/>
-                            <constraint firstItem="4tR-fw-jC2" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="32" id="dck-G1-mj0"/>
+                            <constraint firstItem="Bim-qs-W3J" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="32" id="b7m-WJ-OG3"/>
+                            <constraint firstItem="4tR-fw-jC2" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="d7R-qd-qoe"/>
+                            <constraint firstItem="Bim-qs-W3J" firstAttribute="top" secondItem="4tR-fw-jC2" secondAttribute="bottom" constant="12" id="lny-IG-vGo"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
                         <outlet property="colorPicker" destination="4tR-fw-jC2" id="aSw-md-MWV"/>
+                        <outlet property="constraint" destination="BlO-xm-mEu" id="E4S-8i-gtu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="116" y="27.436281859070466"/>
         </scene>
     </scenes>
 </document>
