@@ -17,7 +17,7 @@ public protocol ColorPickerViewDelegate: class {
 @IBDesignable
 public class ColorPicker: UIView {
 
-    var selectedHSB = HSB(hue: 1, saturation: 1, brightness: 1, alpha: 1)
+    private var selectedHSB = HSB(hue: 1, saturation: 1, brightness: 1, alpha: 1)
     public weak var delegate: ColorPickerViewDelegate?
 
     private lazy var indicatorLayer: CALayer = {
@@ -35,15 +35,15 @@ public class ColorPicker: UIView {
         return indicatorLayer
     }()
 
-    @IBInspectable public var wheelBorderWidth: CGFloat = 0.0 {
+    @IBInspectable public var colorWheelBorderWidth: CGFloat = 0.0 {
         didSet {
-            layer.borderWidth = wheelBorderWidth
+            layer.borderWidth = colorWheelBorderWidth
         }
     }
 
-    @IBInspectable public var wheelBorderColor: UIColor? {
+    @IBInspectable public var colorWheelBorderColor: UIColor? {
         didSet {
-            layer.borderColor = wheelBorderColor?.cgColor
+            layer.borderColor = colorWheelBorderColor?.cgColor
         }
     }
 
@@ -95,29 +95,37 @@ public class ColorPicker: UIView {
     }
 
     func didTouch(at point: CGPoint) {
-        let wheelRadius = frame.width / 2
+        let colorWheelRadius = frame.width / 2
 
-        let dx = Double(wheelRadius - point.x)
-        let dy = Double(wheelRadius - point.y)
+        let dx = Double(colorWheelRadius - point.x)
+        let dy = Double(colorWheelRadius - point.y)
         let distance = CGFloat(sqrt(dx * dx + dy * dy))
 
         // Check drag distance and move indicator
-        guard distance < wheelRadius else { return }
+        guard distance < colorWheelRadius else { return }
         indicatorLayer.position = point
 
+        // MARK: Research exclusive memory access
         var hue = CGFloat()
         var saturation = CGFloat()
         getHSValue(at: point, hue: &hue, saturation: &saturation)
-        let selectedColor = UIColor(hue: hue, saturation: saturation, brightness: 1, alpha: 1)
+        selectedHSB.hue = hue
+        selectedHSB.saturation = saturation
+        let selectedColor = UIColor(
+            hue: selectedHSB.hue,
+            saturation: selectedHSB.saturation,
+            brightness: selectedHSB.brightness,
+            alpha: selectedHSB.alpha
+        )
         indicatorLayer.backgroundColor = selectedColor.cgColor
         delegate?.colorPicker(self, didSelect: selectedColor)
     }
 
     func commonInit() {
         // configure layer
-        layer.contents = createHSWheelImage(size: frame.size)
-        layer.borderWidth = wheelBorderWidth
-        layer.borderColor = wheelBorderColor?.cgColor
+        layer.contents = createHSColorWheelImage(size: frame.size)
+        layer.borderWidth = colorWheelBorderWidth
+        layer.borderColor = colorWheelBorderColor?.cgColor
         layer.cornerRadius = min(frame.width, frame.height) / 2
         layer.masksToBounds = true
 
@@ -131,17 +139,17 @@ public class ColorPicker: UIView {
 // MARK: - Helpers
 extension ColorPicker {
 
-    func createHSWheelImage(size: CGSize) -> CGImage {
-        // Creates a bitmap of the Hue Saturation wheel
-        let wheelDiameter = frame.width
-        let bufferLength: Int = Int(wheelDiameter * wheelDiameter * 4)
+    func createHSColorWheelImage(size: CGSize) -> CGImage {
+        // Creates a bitmap of the Hue Saturation colorWheel
+        let colorWheelDiameter = frame.width
+        let bufferLength: Int = Int(colorWheelDiameter * colorWheelDiameter * 4)
 
         let bitmapData: CFMutableData = CFDataCreateMutable(nil, 0)
         CFDataSetLength(bitmapData, CFIndex(bufferLength))
         let bitmap = CFDataGetMutableBytePtr(bitmapData)
 
-        for y in stride(from: CGFloat(0), to: wheelDiameter, by: CGFloat(1)) {
-            for x in stride(from: CGFloat(0), to: wheelDiameter, by: CGFloat(1)) {
+        for y in stride(from: CGFloat(0), to: colorWheelDiameter, by: CGFloat(1)) {
+            for x in stride(from: CGFloat(0), to: colorWheelDiameter, by: CGFloat(1)) {
                 var hue: CGFloat = 0
                 var saturation: CGFloat = 0
                 var alpha: CGFloat = 0.0
@@ -157,10 +165,10 @@ extension ColorPicker {
                         alpha = 1.0
                     }
 
-                    let hsb = HSB(hue: hue, saturation: saturation, brightness: 1.0, alpha: alpha)
+                    let hsb = HSB(hue: hue, saturation: saturation, brightness: selectedHSB.brightness, alpha: alpha)
                     rgb = convertHSBToRGB(hsb)
                 }
-                let offset = Int(4 * (x + y * wheelDiameter))
+                let offset = Int(4 * (x + y * colorWheelDiameter))
                 bitmap?[offset] = UInt8(rgb.red * 255)
                 bitmap?[offset + 1] = UInt8(rgb.green * 255)
                 bitmap?[offset + 2] = UInt8(rgb.blue * 255)
@@ -173,11 +181,11 @@ extension ColorPicker {
         let dataProvider = CGDataProvider(data: bitmapData)
         let bitmapInfo = CGBitmapInfo(rawValue: CGBitmapInfo().rawValue | CGImageAlphaInfo.last.rawValue)
         let imageRef = CGImage(
-            width: Int(wheelDiameter),
-            height: Int(wheelDiameter),
+            width: Int(colorWheelDiameter),
+            height: Int(colorWheelDiameter),
             bitsPerComponent: 8,
             bitsPerPixel: 32,
-            bytesPerRow: Int(wheelDiameter) * 4,
+            bytesPerRow: Int(colorWheelDiameter) * 4,
             space: colorSpace,
             bitmapInfo: bitmapInfo,
             provider: dataProvider!,
@@ -188,10 +196,10 @@ extension ColorPicker {
     }
 
     func getHSValue(at point: CGPoint, hue: inout CGFloat, saturation: inout CGFloat) {
-        // Get hue and saturation for a given point (x,y) in the wheel
-        let wheelRadius = frame.width / 2
-        let dx = CGFloat(point.x - wheelRadius) / wheelRadius
-        let dy = CGFloat(point.y - wheelRadius) / wheelRadius
+        // Get hue and saturation for a given point (x,y) in the colorWheel
+        let colorWheelRadius = frame.width / 2
+        let dx = CGFloat(point.x - colorWheelRadius) / colorWheelRadius
+        let dy = CGFloat(point.y - colorWheelRadius) / colorWheelRadius
         let d = sqrt(dx * dx + dy * dy)
 
         saturation = d
