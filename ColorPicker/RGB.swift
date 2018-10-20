@@ -11,17 +11,17 @@ import Foundation
 public struct RGB {
     public var red: CGFloat
     public var green: CGFloat
-    public var brue: CGFloat
+    public var blue: CGFloat
     public var alpha: CGFloat
 
     public init(
         red: CGFloat,
         green: CGFloat,
-        brue: CGFloat,
+        blue: CGFloat,
         alpha: CGFloat) {
         self.red = red
         self.green = green
-        self.brue = brue
+        self.blue = blue
         self.alpha = alpha
     }
 }
