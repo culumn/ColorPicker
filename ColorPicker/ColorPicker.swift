@@ -183,7 +183,11 @@ extension ColorPicker {
         // If `isIndicatorHidden` is hidden, not update the indicator
         guard !isIndicatorHidden else { return }
         indicatorLayer.backgroundColor = selectedColor.cgColor
+
+        CATransaction.begin()
+        CATransaction.setValue(kCFBooleanTrue, forKey: kCATransactionDisableActions)
         indicatorLayer.position = getPointFromHS(hue: selectedHSB.hue, saturation: selectedHSB.saturation)
+        CATransaction.commit()
     }
 }
 
