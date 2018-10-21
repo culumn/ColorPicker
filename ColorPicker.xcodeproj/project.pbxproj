@@ -15,7 +15,7 @@
 		966E5795217A0A2C009CBABF /* ColorPicker.h in Headers */ = {isa = PBXBuildFile; fileRef = 966E5787217A0A2B009CBABF /* ColorPicker.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		966E57C1217A12EC009CBABF /* RGB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966E57C0217A12EC009CBABF /* RGB.swift */; };
 		966E57C3217A12F3009CBABF /* HSB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966E57C2217A12F3009CBABF /* HSB.swift */; };
-		966E57C8217A1437009CBABF /* ColorPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966E57C7217A1437009CBABF /* ColorPicker.swift */; };
+		966E57C8217A1437009CBABF /* ColorPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 966E57C7217A1437009CBABF /* ColorPickerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,7 +40,7 @@
 		966E5794217A0A2C009CBABF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		966E57C0217A12EC009CBABF /* RGB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RGB.swift; sourceTree = "<group>"; };
 		966E57C2217A12F3009CBABF /* HSB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HSB.swift; sourceTree = "<group>"; };
-		966E57C7217A1437009CBABF /* ColorPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPicker.swift; sourceTree = "<group>"; };
+		966E57C7217A1437009CBABF /* ColorPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,7 +87,7 @@
 				966E5788217A0A2B009CBABF /* Info.plist */,
 				966E57C0217A12EC009CBABF /* RGB.swift */,
 				966E57C2217A12F3009CBABF /* HSB.swift */,
-				966E57C7217A1437009CBABF /* ColorPicker.swift */,
+				966E57C7217A1437009CBABF /* ColorPickerView.swift */,
 				9668C54D217B0DCD0021FC09 /* ColorPickerViewDelegate.swift */,
 				9668C54B217AE63C0021FC09 /* ColorSpaceConverter.swift */,
 				9668C54F217B29BF0021FC09 /* UIColorExtension.swift */,
@@ -213,7 +213,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				966E57C8217A1437009CBABF /* ColorPicker.swift in Sources */,
+				966E57C8217A1437009CBABF /* ColorPickerView.swift in Sources */,
 				966E57C1217A12EC009CBABF /* RGB.swift in Sources */,
 				9668C54E217B0DCD0021FC09 /* ColorPickerViewDelegate.swift in Sources */,
 				966E57C3217A12F3009CBABF /* HSB.swift in Sources */,
@@ -368,8 +368,9 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -383,6 +384,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = io.github.culumn.ColorPicker;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
@@ -395,8 +397,9 @@
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -410,6 +413,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = io.github.culumn.ColorPicker;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -420,7 +424,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = ColorPickerTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -429,6 +434,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = io.github.culumn.ColorPickerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -438,7 +444,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = ColorPickerTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -447,6 +454,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = io.github.culumn.ColorPickerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

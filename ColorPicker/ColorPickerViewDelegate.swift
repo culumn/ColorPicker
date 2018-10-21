@@ -9,7 +9,7 @@
 import Foundation
 
 public protocol ColorPickerViewDelegate: class {
-    func colorPickerWillBeginDragging(_ colorPicker: ColorPicker)
-    func colorPickerDidSelectColor(_ colorPicker: ColorPicker)
-    func colorPickerDidEndDagging(_ colorPicker: ColorPicker)
+    func colorPickerWillBeginDragging(_ colorPicker: ColorPickerView)
+    func colorPickerDidSelectColor(_ colorPicker: ColorPickerView)
+    func colorPickerDidEndDagging(_ colorPicker: ColorPickerView)
 }

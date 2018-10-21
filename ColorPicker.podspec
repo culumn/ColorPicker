@@ -27,8 +27,10 @@ Pod::Spec.new do |s|
   s.social_media_url = 'https://twitter.com/Yoshi64190101'
 
   s.ios.deployment_target = '9.0'
+  s.swift_version = '4.2'
 
-  s.source_files = 'ColorPicker/**/*'
+  s.source_files = 'ColorPicker/**/*.{swift}'
+  # s.exclude_files = "ColorPicker/*.plist"
   
   # s.resource_bundles = {
   #   'ColorPicker' => ['ColorPicker/Assets/*.png']

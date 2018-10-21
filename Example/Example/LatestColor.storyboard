@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="YYh-BS-fSi">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Lastest Color Viewer View Controller-->
+        <scene sceneID="EhB-p2-v9i">
+            <objects>
+                <viewController id="YYh-BS-fSi" customClass="LastestColorViewerViewController" customModule="Example" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="T9Y-a6-tUe">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Zep-YS-cnQ" userLabel="Color Stack View">
+                                <rect key="frame" x="32" y="258.5" width="311" height="170"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Latest color" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KxO-gt-AiR">
+                                        <rect key="frame" x="0.0" y="0.0" width="311" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HLa-0d-tJH">
+                                        <rect key="frame" x="0.0" y="30.5" width="311" height="139.5"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="170" id="nHN-Bf-K6c"/>
+                                </constraints>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MYp-Bv-p70">
+                                <rect key="frame" x="32" y="448.5" width="311" height="30"/>
+                                <state key="normal" title="Edit color"/>
+                                <connections>
+                                    <action selector="didTapEditButton:" destination="YYh-BS-fSi" eventType="touchUpInside" id="g3v-nL-5Jt"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Zep-YS-cnQ" firstAttribute="leading" secondItem="qiT-mM-aci" secondAttribute="leading" constant="32" id="2t3-u5-H7J"/>
+                            <constraint firstItem="qiT-mM-aci" firstAttribute="trailing" secondItem="Zep-YS-cnQ" secondAttribute="trailing" constant="32" id="6bK-dW-S2b"/>
+                            <constraint firstItem="MYp-Bv-p70" firstAttribute="leading" secondItem="qiT-mM-aci" secondAttribute="leading" constant="32" id="IbZ-XU-MVo"/>
+                            <constraint firstItem="Zep-YS-cnQ" firstAttribute="centerY" secondItem="qiT-mM-aci" secondAttribute="centerY" id="nD2-O3-HQQ"/>
+                            <constraint firstItem="MYp-Bv-p70" firstAttribute="top" secondItem="Zep-YS-cnQ" secondAttribute="bottom" constant="20" id="uPT-22-KOX"/>
+                            <constraint firstItem="qiT-mM-aci" firstAttribute="trailing" secondItem="MYp-Bv-p70" secondAttribute="trailing" constant="32" id="wbr-wn-Fdt"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="qiT-mM-aci"/>
+                    </view>
+                    <connections>
+                        <outlet property="latestColorview" destination="HLa-0d-tJH" id="FEh-MO-BNs"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="66a-Pv-4ws" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1560.8" y="26.53673163418291"/>
+        </scene>
+        <!--Editor-->
+        <scene sceneID="7SY-NI-pvK">
+            <objects>
+                <viewController storyboardIdentifier="LatestColorEditorViewController" title="Editor" id="kVk-EV-NYG" customClass="LatestColorEditorViewController" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Idz-Ha-E9U">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CtE-js-tC7" customClass="ColorPickerView" customModule="ColorPicker">
+                                <rect key="frame" x="37.5" y="193.5" width="300" height="300"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="300" id="JcT-mq-zyw"/>
+                                    <constraint firstAttribute="width" secondItem="CtE-js-tC7" secondAttribute="height" multiplier="1:1" id="Vxy-p6-Ffh"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2fU-WH-LEh">
+                                <rect key="frame" x="32" y="513.5" width="311" height="30"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Close"/>
+                                <connections>
+                                    <action selector="didTapCloseButton:" destination="kVk-EV-NYG" eventType="touchUpInside" id="bBk-9l-77c"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="mMt-dd-9hS" firstAttribute="trailing" secondItem="2fU-WH-LEh" secondAttribute="trailing" constant="32" id="Gmf-Iq-Tab"/>
+                            <constraint firstItem="CtE-js-tC7" firstAttribute="centerX" secondItem="mMt-dd-9hS" secondAttribute="centerX" id="MTs-Jd-USx"/>
+                            <constraint firstItem="2fU-WH-LEh" firstAttribute="leading" secondItem="mMt-dd-9hS" secondAttribute="leading" constant="32" id="Qy6-F9-Vir"/>
+                            <constraint firstItem="CtE-js-tC7" firstAttribute="centerY" secondItem="mMt-dd-9hS" secondAttribute="centerY" id="cYl-Ti-5Md"/>
+                            <constraint firstItem="2fU-WH-LEh" firstAttribute="top" secondItem="CtE-js-tC7" secondAttribute="bottom" constant="20" id="f7Z-5v-7mr"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="mMt-dd-9hS"/>
+                    </view>
+                    <connections>
+                        <outlet property="colorPicker" destination="CtE-js-tC7" id="COO-MF-wzG"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yVr-Mr-rVw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2345" y="27"/>
+        </scene>
+    </scenes>
+</document>

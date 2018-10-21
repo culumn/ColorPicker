@@ -9,9 +9,9 @@
 import UIKit
 import ColorPicker
 
-class ViewController: UIViewController {
+class ColorEditorViewController: UIViewController {
 
-    @IBOutlet weak var colorPicker: ColorPicker!
+    @IBOutlet weak var colorPicker: ColorPickerView!
     @IBOutlet weak var slider: UISlider!
     @IBOutlet weak var selectedColorView: UIView!
     @IBOutlet weak var `switch`: UISwitch!
@@ -22,9 +22,6 @@ class ViewController: UIViewController {
         super.viewDidLoad()
 
         colorPicker.delegate = self
-        let color = #colorLiteral(red: 0.8887520799, green: 0.7259494958, blue: 0.8883424245, alpha: 1)
-        colorPicker.updateSelectedColor(color)
-        slider.value = Float(color.hsb.brightness)
 
         selectedColorView.layer.cornerRadius = 20
         selectedColorView.clipsToBounds = true
@@ -43,19 +40,19 @@ class ViewController: UIViewController {
     }
 }
 
-extension ViewController: ColorPickerViewDelegate {
+extension ColorEditorViewController: ColorPickerViewDelegate {
 
-    func colorPickerWillBeginDragging(_ colorPicker: ColorPicker) {
+    func colorPickerWillBeginDragging(_ colorPicker: ColorPickerView) {
         selectedColorView.backgroundColor = colorPicker.selectedColor
         guard isHiddenIndicatorWhileDragging else { return }
         colorPicker.isIndicatorHidden = true
     }
 
-    func colorPickerDidSelectColor(_ colorPicker: ColorPicker) {
+    func colorPickerDidSelectColor(_ colorPicker: ColorPickerView) {
         selectedColorView.backgroundColor = colorPicker.selectedColor
     }
 
-    func colorPickerDidEndDagging(_ colorPicker: ColorPicker) {
+    func colorPickerDidEndDagging(_ colorPicker: ColorPickerView) {
         selectedColorView.backgroundColor = colorPicker.selectedColor
         guard isHiddenIndicatorWhileDragging else { return }
         colorPicker.isIndicatorHidden = false
