@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4tR-fw-jC2" customClass="ColorPicker" customModule="ColorPicker">
-                                <rect key="frame" x="32" y="188" width="311" height="311"/>
+                                <rect key="frame" x="37.5" y="193.5" width="300" height="300"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="300" id="BlO-xm-mEu"/>
@@ -27,7 +27,7 @@
                                 </constraints>
                             </view>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="Bim-qs-W3J">
-                                <rect key="frame" x="82" y="619" width="118" height="30"/>
+                                <rect key="frame" x="30" y="505.5" width="315" height="31"/>
                                 <connections>
                                     <action selector="didChangeSliderValue:" destination="BYZ-38-t0r" eventType="valueChanged" id="CU4-t4-KeH"/>
                                 </connections>
@@ -46,6 +46,7 @@
                     <connections>
                         <outlet property="colorPicker" destination="4tR-fw-jC2" id="aSw-md-MWV"/>
                         <outlet property="constraint" destination="BlO-xm-mEu" id="E4S-8i-gtu"/>
+                        <outlet property="slider" destination="Bim-qs-W3J" id="Fpc-rC-zFU"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
