@@ -8,7 +8,6 @@
 
 import Foundation
 
-@IBDesignable
 public class ColorPicker: UIView {
 
     /// The selected color information in a HSB colorspace.
@@ -109,6 +108,7 @@ public class ColorPicker: UIView {
         selectedHSB.brightness = brightness
         layer.contents = createHSColorWheelImage(size: frame.size)
         updateIndicatorToSelectedColorIfNotHidden()
+        delegate?.colorPickerDidSelectColor(self)
     }
 
     /// Update the current selected color
@@ -133,7 +133,7 @@ extension ColorPicker {
 
         updateSelectedColor(at: position)
         updateIndicatorToSelectedColorIfNotHidden()
-        delegate?.colorPickerDidEndEditingColor(self)
+        delegate?.colorPickerWillBeginDragging(self)
     }
 
     public override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -145,7 +145,7 @@ extension ColorPicker {
 
         updateSelectedColor(at: position)
         updateIndicatorToSelectedColorIfNotHidden()
-        delegate?.colorPickerDidEndEditingColor(self)
+        delegate?.colorPickerDidSelectColor(self)
     }
 
     public override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
