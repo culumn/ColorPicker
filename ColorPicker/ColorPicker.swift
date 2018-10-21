@@ -19,6 +19,18 @@ public class ColorPicker: UIView {
         return selectedHSB.color
     }
 
+    @IBInspectable public var isIndicatorHidden: Bool = false {
+        didSet {
+            indicatorLayer.isHidden = isIndicatorHidden
+
+            // If `isIndicatorHidden` is false, update indicator's position and background color
+            // to current selected color
+            if !isIndicatorHidden {
+                updateIndicatorToSelectedColorIfNotHidden()
+            }
+        }
+    }
+
     /// The object that acts as the delegate of the color picker.
     public weak var delegate: ColorPickerViewDelegate?
 
@@ -58,9 +70,7 @@ public class ColorPicker: UIView {
 
         let indicatorLayer = CALayer()
         indicatorLayer.cornerRadius = diameter / 2
-        indicatorLayer.backgroundColor = UIColor.white.cgColor
         indicatorLayer.bounds = CGRect(x: 0, y: 0, width: diameter, height: diameter)
-        indicatorLayer.position = getPointFromHS(hue: selectedHSB.hue, saturation: selectedHSB.saturation)
         indicatorLayer.shadowColor = UIColor.black.cgColor
         indicatorLayer.shadowOffset = .zero
         indicatorLayer.shadowRadius = 1
@@ -88,6 +98,7 @@ public class ColorPicker: UIView {
         // Configure indicator layer
         indicatorLayer.borderWidth = indicatorBorderWidth
         indicatorLayer.borderColor = indicatorBorderColor?.cgColor
+        updateIndicatorToSelectedColorIfNotHidden()
         layer.addSublayer(indicatorLayer)
     }
 
@@ -97,7 +108,7 @@ public class ColorPicker: UIView {
     public func updateBrightness(_ brightness: CGFloat) {
         selectedHSB.brightness = brightness
         layer.contents = createHSColorWheelImage(size: frame.size)
-        updateSelectedColor()
+        updateIndicatorToSelectedColorIfNotHidden()
     }
 
     /// Update the current selected color
@@ -106,9 +117,7 @@ public class ColorPicker: UIView {
     public func updateSelectedColor(_ color: UIColor) {
         selectedHSB = color.hsb
         layer.contents = createHSColorWheelImage(size: frame.size)
-        let selecgedPoint = getPointFromHS(hue: selectedHSB.hue, saturation: selectedHSB.saturation)
-        indicatorLayer.position = selecgedPoint
-        indicatorLayer.backgroundColor = selectedColor.cgColor
+        updateIndicatorToSelectedColorIfNotHidden()
     }
 }
 
@@ -119,8 +128,11 @@ extension ColorPicker {
         super.touchesBegan(touches, with: event)
 
         // If touches in this view, move indicator and update the selected color.
-        guard let position = touches.first?.location(in: self) else { return }
-        updateIndicatorIfTouchesInColorWheel(touchedPoint: position)
+        guard let position = touches.first?.location(in: self),
+            isTouchesInWheelView(touchedPoint: position) else { return }
+
+        updateSelectedColor(at: position)
+        updateIndicatorToSelectedColorIfNotHidden()
         delegate?.colorPickerDidEndEditingColor(self)
     }
 
@@ -128,8 +140,11 @@ extension ColorPicker {
         super.touchesMoved(touches, with: event)
 
         // If touches in this view, move indicator and update the selected color.
-        guard let position = touches.first?.location(in: self) else { return }
-        updateIndicatorIfTouchesInColorWheel(touchedPoint: position)
+        guard let position = touches.first?.location(in: self),
+            isTouchesInWheelView(touchedPoint: position) else { return }
+
+        updateSelectedColor(at: position)
+        updateIndicatorToSelectedColorIfNotHidden()
         delegate?.colorPickerDidEndEditingColor(self)
     }
 
@@ -137,34 +152,38 @@ extension ColorPicker {
         super.touchesEnded(touches, with: event)
 
         // If touches in this view, move indicator and update the selected color.
-        guard let position = touches.first?.location(in: self) else { return }
-        updateIndicatorIfTouchesInColorWheel(touchedPoint: position)
+        guard let position = touches.first?.location(in: self),
+            isTouchesInWheelView(touchedPoint: position) else { return }
+
+        updateSelectedColor(at: position)
+        updateIndicatorToSelectedColorIfNotHidden()
         delegate?.colorPickerDidEndDagging(self)
     }
 
-    private func updateIndicatorIfTouchesInColorWheel(touchedPoint: CGPoint) {
+    private func isTouchesInWheelView(touchedPoint: CGPoint) -> Bool {
         // Calculate distance
         let colorWheelRadius = frame.width / 2
         let dx = Double(colorWheelRadius - touchedPoint.x)
         let dy = Double(colorWheelRadius - touchedPoint.y)
         let distance = CGFloat(sqrt(dx * dx + dy * dy))
 
-        // Check drag distance and move indicator
-        guard distance < colorWheelRadius else { return }
-        indicatorLayer.position = touchedPoint
+        return distance < colorWheelRadius
+    }
 
+    private func updateSelectedColor(at touchedPoint: CGPoint) {
         // Get hue and saturation value from touched point
         var hue = CGFloat()
         var saturation = CGFloat()
         getHSValue(at: touchedPoint, hue: &hue, saturation: &saturation)
         selectedHSB.hue = hue
         selectedHSB.saturation = saturation
-        updateSelectedColor()
     }
 
-    private func updateSelectedColor() {
-        let selectedColor = selectedHSB.color
+    private func updateIndicatorToSelectedColorIfNotHidden() {
+        // If `isIndicatorHidden` is hidden, not update the indicator
+        guard !isIndicatorHidden else { return }
         indicatorLayer.backgroundColor = selectedColor.cgColor
+        indicatorLayer.position = getPointFromHS(hue: selectedHSB.hue, saturation: selectedHSB.saturation)
     }
 }
 
