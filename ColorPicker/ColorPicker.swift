@@ -60,7 +60,7 @@ public class ColorPicker: UIView {
         indicatorLayer.cornerRadius = diameter / 2
         indicatorLayer.backgroundColor = UIColor.white.cgColor
         indicatorLayer.bounds = CGRect(x: 0, y: 0, width: diameter, height: diameter)
-        indicatorLayer.position = CGPoint(x: frame.width / 2, y: frame.height / 2)
+        indicatorLayer.position = getPointFromHS(hue: selectedHSB.hue, saturation: selectedHSB.saturation)
         indicatorLayer.shadowColor = UIColor.black.cgColor
         indicatorLayer.shadowOffset = .zero
         indicatorLayer.shadowRadius = 1
@@ -120,8 +120,8 @@ extension ColorPicker {
 
         // If touches in this view, move indicator and update the selected color.
         guard let position = touches.first?.location(in: self) else { return }
-
         updateIndicatorIfTouchesInColorWheel(touchedPoint: position)
+        delegate?.colorPickerDidEndEditingColor(self)
     }
 
     public override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -130,6 +130,7 @@ extension ColorPicker {
         // If touches in this view, move indicator and update the selected color.
         guard let position = touches.first?.location(in: self) else { return }
         updateIndicatorIfTouchesInColorWheel(touchedPoint: position)
+        delegate?.colorPickerDidEndEditingColor(self)
     }
 
     public override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -138,6 +139,7 @@ extension ColorPicker {
         // If touches in this view, move indicator and update the selected color.
         guard let position = touches.first?.location(in: self) else { return }
         updateIndicatorIfTouchesInColorWheel(touchedPoint: position)
+        delegate?.colorPickerDidEndDagging(self)
     }
 
     private func updateIndicatorIfTouchesInColorWheel(touchedPoint: CGPoint) {
@@ -163,7 +165,6 @@ extension ColorPicker {
     private func updateSelectedColor() {
         let selectedColor = selectedHSB.color
         indicatorLayer.backgroundColor = selectedColor.cgColor
-        delegate?.colorPicker(self, didSelect: selectedColor)
     }
 }
 

@@ -9,7 +9,6 @@
 import Foundation
 
 public protocol ColorPickerViewDelegate: class {
-    func colorPicker(
-        _ colorPicker: ColorPicker,
-        didSelect color: UIColor)
+    func colorPickerDidEndEditingColor(_ colorPicker: ColorPicker)
+    func colorPickerDidEndDagging(_ colorPicker: ColorPicker)
 }
