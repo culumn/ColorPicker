@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9668C54C217AE63C0021FC09 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9668C54B217AE63C0021FC09 /* Util.swift */; };
+		9668C54C217AE63C0021FC09 /* ColorSpaceConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9668C54B217AE63C0021FC09 /* ColorSpaceConverter.swift */; };
 		9668C54E217B0DCD0021FC09 /* ColorPickerViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9668C54D217B0DCD0021FC09 /* ColorPickerViewDelegate.swift */; };
 		9668C550217B29BF0021FC09 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9668C54F217B29BF0021FC09 /* UIColorExtension.swift */; };
 		966E578E217A0A2C009CBABF /* ColorPicker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 966E5784217A0A2B009CBABF /* ColorPicker.framework */; };
@@ -29,7 +29,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		9668C54B217AE63C0021FC09 /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
+		9668C54B217AE63C0021FC09 /* ColorSpaceConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSpaceConverter.swift; sourceTree = "<group>"; };
 		9668C54D217B0DCD0021FC09 /* ColorPickerViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerViewDelegate.swift; sourceTree = "<group>"; };
 		9668C54F217B29BF0021FC09 /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		966E5784217A0A2B009CBABF /* ColorPicker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ColorPicker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -89,7 +89,7 @@
 				966E57C2217A12F3009CBABF /* HSB.swift */,
 				966E57C7217A1437009CBABF /* ColorPicker.swift */,
 				9668C54D217B0DCD0021FC09 /* ColorPickerViewDelegate.swift */,
-				9668C54B217AE63C0021FC09 /* Util.swift */,
+				9668C54B217AE63C0021FC09 /* ColorSpaceConverter.swift */,
 				9668C54F217B29BF0021FC09 /* UIColorExtension.swift */,
 			);
 			path = ColorPicker;
@@ -217,7 +217,7 @@
 				966E57C1217A12EC009CBABF /* RGB.swift in Sources */,
 				9668C54E217B0DCD0021FC09 /* ColorPickerViewDelegate.swift in Sources */,
 				966E57C3217A12F3009CBABF /* HSB.swift in Sources */,
-				9668C54C217AE63C0021FC09 /* Util.swift in Sources */,
+				9668C54C217AE63C0021FC09 /* ColorSpaceConverter.swift in Sources */,
 				9668C550217B29BF0021FC09 /* UIColorExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
