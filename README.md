@@ -33,7 +33,7 @@ To run the example project, open the `Example/Example.xcworkspace`.
 ColorPicker is available through [CocoaPods](https://cocoapods.org). To install it, simply add the following line to your `Podfile`:
 
 ```ruby
-pod 'ColorPicker'
+pod 'CULColorPicker'
 ```
 
 ### [Carthage](https://github.com/Carthage/Carthage)
