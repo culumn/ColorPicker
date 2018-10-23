@@ -1,6 +1,6 @@
 # ColorPicker
 
-[![CI Status](https://img.shields.io/travis/culumn/ColorPicker.svg?style=flat)](https://travis-ci.org/culumn/ColorPicker) [![Version](https://img.shields.io/cocoapods/v/CULColorPicker.svg?style=flat)](https://cocoapods.org/pods/CULColorPicker) [![License](https://img.shields.io/cocoapods/l/ColorPicker.svg?style=flat)](https://cocoapods.org/pods/ColorPicker) [![Platform](https://img.shields.io/cocoapods/p/ColorPicker.svg?style=flat)](https://cocoapods.org/pods/ColorPicker)
+[![CI Status](https://img.shields.io/travis/culumn/ColorPicker.svg?style=flat)](https://travis-ci.org/culumn/ColorPicker) [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage) [![Version](https://img.shields.io/cocoapods/v/CULColorPicker.svg?style=flat)](https://cocoapods.org/pods/CULColorPicker) [![License](https://img.shields.io/cocoapods/l/ColorPicker.svg?style=flat)](https://cocoapods.org/pods/ColorPicker) [![Platform](https://img.shields.io/cocoapods/p/ColorPicker.svg?style=flat)](https://cocoapods.org/pods/ColorPicker)
 
 This is the simple color picker for iOS.
 
@@ -43,9 +43,9 @@ github "culumn/ColorPicker"
 ```
 
 ## Requirements
-iOS 9.0+
-Xcode 10.0
-Swift 4.2
+- iOS 9.0+
+- Xcode 10.0
+- Swift 4.2
 
 ## Author
 
