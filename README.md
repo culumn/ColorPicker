@@ -4,6 +4,7 @@
 
 This is the simple color picker for iOS.
 
+![color-picker](./asset/color-picker.gif)
 
 ## Usage
 ```swift
