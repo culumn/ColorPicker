@@ -12,8 +12,5 @@ language: objective-c
 # - pod install --project-directory=Example
 script:
 - set -o pipefail
-- xcodebuild test -enableCodeCoverage YES \
--workspace Example/Example.xcworkspace \
--scheme ColorPicker \
--sdk iphonesimulator12.0 ONLY_ACTIVE_ARCH=NO | xcpretty
+- xcodebuild test -enableCodeCoverage YES -workspace Example/Example.xcworkspace -scheme ColorPicker -sdk iphonesimulator12.0 ONLY_ACTIVE_ARCH=NO | xcpretty
 - pod lib lint --allow-warnings --verbose --no-clean
