@@ -12,7 +12,7 @@ class LastestColorViewerViewController: UIViewController {
 
     @IBOutlet weak var latestColorview: UIView!
 
-    var selectedcolor = UIColor.white {
+    var selectedcolor: UIColor? = .white {
         didSet {
             latestColorview.backgroundColor = selectedcolor
         }
@@ -27,12 +27,6 @@ class LastestColorViewerViewController: UIViewController {
         latestColorview.layer.borderWidth = 1
     }
 
-//    override func viewWillAppear(_ animated: Bool) {
-//        super.viewWillAppear(animated)
-//
-//        latestColorview.backgroundColor = selectedcolor
-//    }
-
     @IBAction func didTapEditButton(_ sender: UIButton) {
         guard let editorVC = storyboard?.instantiateViewController(withIdentifier: "LatestColorEditorViewController") as? LatestColorEditorViewController else { fatalError() }
         editorVC.delegate = self
@@ -45,7 +39,7 @@ class LastestColorViewerViewController: UIViewController {
 
 extension LastestColorViewerViewController: LatestColorEditorViewControllerDelegate {
 
-    func viewController(_ latestColorEditorViewController: LatestColorEditorViewController, didEdit color: UIColor) {
+    func viewController(_ latestColorEditorViewController: LatestColorEditorViewController, didEdit color: UIColor?) {
         selectedcolor = color
     }
 }

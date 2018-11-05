@@ -14,8 +14,8 @@ public class ColorPickerView: UIView {
     private var selectedHSB = UIColor.white.hsb
 
     /// Current selected color in color picker.
-    public var selectedColor: UIColor {
-        return selectedHSB.color
+    public var selectedColor: UIColor? {
+        return selectedHSB?.color
     }
 
     /// The object that acts as the delegate of the color picker.
@@ -105,7 +105,7 @@ public class ColorPickerView: UIView {
     ///
     /// - Parameter brightness: The new brightness components
     public func updateBrightness(_ brightness: CGFloat) {
-        selectedHSB.brightness = brightness
+        selectedHSB?.brightness = brightness
         layer.contents = createHSColorWheelImage(size: frame.size)
         updateIndicatorToSelectedColorIfNotHidden()
         delegate?.colorPickerDidSelectColor(self)
@@ -114,8 +114,8 @@ public class ColorPickerView: UIView {
     /// Update the current selected color
     ///
     /// - Parameter color: The new color
-    public func updateSelectedColor(_ color: UIColor) {
-        selectedHSB = color.hsb
+    public func updateSelectedColor(_ color: UIColor?) {
+        selectedHSB = color?.hsb
         layer.contents = createHSColorWheelImage(size: frame.size)
         updateIndicatorToSelectedColorIfNotHidden()
     }
@@ -175,18 +175,20 @@ extension ColorPickerView {
         var hue = CGFloat()
         var saturation = CGFloat()
         getHSValue(at: touchedPoint, hue: &hue, saturation: &saturation)
-        selectedHSB.hue = hue
-        selectedHSB.saturation = saturation
+        selectedHSB?.hue = hue
+        selectedHSB?.saturation = saturation
     }
 
     private func updateIndicatorToSelectedColorIfNotHidden() {
         // If `isIndicatorHidden` is hidden, not update the indicator
         guard !isIndicatorHidden else { return }
-        indicatorLayer.backgroundColor = selectedColor.cgColor
+        indicatorLayer.backgroundColor = selectedColor?.cgColor
 
+        guard let selectedHue = selectedHSB?.hue,
+            let selectedSaturation = selectedHSB?.saturation else { return }
         CATransaction.begin()
         CATransaction.setValue(kCFBooleanTrue, forKey: kCATransactionDisableActions)
-        indicatorLayer.position = getPointFromHS(hue: selectedHSB.hue, saturation: selectedHSB.saturation)
+        indicatorLayer.position = getPointFromHS(hue: selectedHue, saturation: selectedSaturation)
         CATransaction.commit()
     }
 }
@@ -203,11 +205,15 @@ extension ColorPickerView {
         CFDataSetLength(bitmapData, CFIndex(bufferLength))
         let bitmap = CFDataGetMutableBytePtr(bitmapData)
 
+        guard let brightness = selectedHSB?.brightness else {
+            fatalError("Failed to get the brightness component of the selected color.")
+        }
+
+        var hue: CGFloat = 0
+        var saturation: CGFloat = 0
+        var alpha: CGFloat = 0
         for y in 0 ..< colorWheelDiameter {
             for x in 0 ..< colorWheelDiameter {
-                var hue: CGFloat = 0
-                var saturation: CGFloat = 0
-                var alpha: CGFloat = 0
                 var rgb = RGB(red: 0, green: 0, blue: 0, alpha: 0)
 
                 let point = CGPoint(x: x, y: y)
@@ -220,8 +226,11 @@ extension ColorPickerView {
                         alpha = 1.0
                     }
 
-                    let hsb = HSB(hue: hue, saturation: saturation, brightness: selectedHSB.brightness, alpha: alpha)
-                    rgb = ColorSpaceConverter.convertToRGB(hsb: hsb)
+                    let hsb = HSB(hue: hue, saturation: saturation, brightness: brightness, alpha: alpha)
+                    guard let convertedRGB = ColorSpaceConverter.convertToRGB(hsb: hsb) else {
+                        fatalError("Failed to convert components for hsb to components for rgb.")
+                    }
+                    rgb = convertedRGB
                 }
                 let offset = Int(4 * (x + y * colorWheelDiameter))
                 bitmap?[offset] = UInt8(rgb.red * 255)

@@ -9,11 +9,13 @@
 /// The class converts the color spaces.
 final class ColorSpaceConverter {
 
+    private init() {}
+
     /// Convert to the RGB color space for a given HSB color space.
     ///
     /// - Parameter hsb: The HSB color space.
     /// - Returns: The RGB color space corresponding the HSB color space.
-    class func convertToRGB(hsb: HSB) -> RGB {
+    class func convertToRGB(hsb: HSB) -> RGB? {
         let color = hsb.color
         return color.rgb
     }
@@ -22,7 +24,7 @@ final class ColorSpaceConverter {
     ///
     /// - Parameter rgb: The RGB color space.
     /// - Returns: The HSB color space corresponding the RGB color space.
-    class func convertToHSB(rgb: RGB) -> HSB {
+    class func convertToHSB(rgb: RGB) -> HSB? {
         let color = rgb.color
         return color.hsb
     }

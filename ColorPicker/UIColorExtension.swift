@@ -10,23 +10,25 @@ import Foundation
 
 public extension UIColor {
 
-    var hsb: HSB {
+    var hsb: HSB? {
         var hue = CGFloat()
         var saturation = CGFloat()
         var brightness = CGFloat()
         var alpha = CGFloat()
 
-        getHue(&hue, saturation: &saturation, brightness: &brightness, alpha: &alpha)
-        return HSB(hue: hue, saturation: saturation, brightness: brightness, alpha: alpha)
+        return getHue(&hue, saturation: &saturation, brightness: &brightness, alpha: &alpha)
+            ? HSB(hue: hue, saturation: saturation, brightness: brightness, alpha: alpha)
+            : nil
     }
 
-    var rgb: RGB {
+    var rgb: RGB? {
         var red = CGFloat()
         var green = CGFloat()
         var blue = CGFloat()
         var alpha = CGFloat()
 
-        getRed(&red, green: &green, blue: &blue, alpha: &alpha)
-        return RGB(red: red, green: green, blue: blue, alpha: alpha)
+        return getRed(&red, green: &green, blue: &blue, alpha: &alpha)
+            ? RGB(red: red, green: green, blue: blue, alpha: alpha)
+            : nil
     }
 }

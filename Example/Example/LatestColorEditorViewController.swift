@@ -12,7 +12,7 @@ import ColorPicker
 protocol LatestColorEditorViewControllerDelegate: class {
     func viewController(
         _ latestColorEditorViewController: LatestColorEditorViewController,
-        didEdit color: UIColor
+        didEdit color: UIColor?
     )
 }
 
@@ -22,7 +22,7 @@ class LatestColorEditorViewController: UIViewController {
 
     @IBOutlet weak var colorPicker: ColorPickerView!
 
-    var selectedColor = UIColor.white
+    var selectedColor: UIColor? = .white
 
     override func viewDidLoad() {
         super.viewDidLoad()
