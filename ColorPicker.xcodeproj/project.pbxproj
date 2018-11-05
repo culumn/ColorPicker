@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		9653A3D621907F7500D9B427 /* ColorSpaceConverterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9653A3D521907F7500D9B427 /* ColorSpaceConverterTests.swift */; };
 		9653A3D82190810D00D9B427 /* RGBTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9653A3D72190810D00D9B427 /* RGBTests.swift */; };
+		9653A3DA2190858200D9B427 /* HSBTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9653A3D92190858200D9B427 /* HSBTests.swift */; };
 		9668C54C217AE63C0021FC09 /* ColorSpaceConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9668C54B217AE63C0021FC09 /* ColorSpaceConverter.swift */; };
 		9668C54E217B0DCD0021FC09 /* ColorPickerViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9668C54D217B0DCD0021FC09 /* ColorPickerViewDelegate.swift */; };
 		9668C550217B29BF0021FC09 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9668C54F217B29BF0021FC09 /* UIColorExtension.swift */; };
@@ -33,6 +34,7 @@
 /* Begin PBXFileReference section */
 		9653A3D521907F7500D9B427 /* ColorSpaceConverterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSpaceConverterTests.swift; sourceTree = "<group>"; };
 		9653A3D72190810D00D9B427 /* RGBTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RGBTests.swift; sourceTree = "<group>"; };
+		9653A3D92190858200D9B427 /* HSBTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HSBTests.swift; sourceTree = "<group>"; };
 		9668C54B217AE63C0021FC09 /* ColorSpaceConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSpaceConverter.swift; sourceTree = "<group>"; };
 		9668C54D217B0DCD0021FC09 /* ColorPickerViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerViewDelegate.swift; sourceTree = "<group>"; };
 		9668C54F217B29BF0021FC09 /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
@@ -104,6 +106,7 @@
 			children = (
 				966E5792217A0A2C009CBABF /* ColorPickerTests.swift */,
 				9653A3D72190810D00D9B427 /* RGBTests.swift */,
+				9653A3D92190858200D9B427 /* HSBTests.swift */,
 				9653A3D521907F7500D9B427 /* ColorSpaceConverterTests.swift */,
 				966E5794217A0A2C009CBABF /* Info.plist */,
 			);
@@ -233,6 +236,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				966E5793217A0A2C009CBABF /* ColorPickerTests.swift in Sources */,
+				9653A3DA2190858200D9B427 /* HSBTests.swift in Sources */,
 				9653A3D621907F7500D9B427 /* ColorSpaceConverterTests.swift in Sources */,
 				9653A3D82190810D00D9B427 /* RGBTests.swift in Sources */,
 			);
