@@ -18,7 +18,8 @@ public struct RGB {
         red: CGFloat,
         green: CGFloat,
         blue: CGFloat,
-        alpha: CGFloat) {
+        alpha: CGFloat
+        ) {
         self.red = red
         self.green = green
         self.blue = blue

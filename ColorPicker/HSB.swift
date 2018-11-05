@@ -18,7 +18,8 @@ public struct HSB {
         hue: CGFloat,
         saturation: CGFloat,
         brightness: CGFloat,
-        alpha: CGFloat) {
+        alpha: CGFloat
+        ) {
         self.hue = hue
         self.saturation = saturation
         self.brightness = brightness
