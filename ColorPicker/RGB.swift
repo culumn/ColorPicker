@@ -14,18 +14,6 @@ public struct RGB {
     public var blue: CGFloat
     public var alpha: CGFloat
 
-    public init(
-        red: CGFloat,
-        green: CGFloat,
-        blue: CGFloat,
-        alpha: CGFloat
-        ) {
-        self.red = red
-        self.green = green
-        self.blue = blue
-        self.alpha = alpha
-    }
-
     public var color: UIColor {
         return UIColor(red: red, green: green, blue: blue, alpha: alpha)
     }

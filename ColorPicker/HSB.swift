@@ -14,18 +14,6 @@ public struct HSB {
     public var brightness: CGFloat
     public var alpha: CGFloat
 
-    public init(
-        hue: CGFloat,
-        saturation: CGFloat,
-        brightness: CGFloat,
-        alpha: CGFloat
-        ) {
-        self.hue = hue
-        self.saturation = saturation
-        self.brightness = brightness
-        self.alpha = alpha
-    }
-
     public var color: UIColor {
         return UIColor(hue: hue, saturation: saturation, brightness: brightness, alpha: alpha)
     }
