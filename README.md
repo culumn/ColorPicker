@@ -30,6 +30,13 @@ class ViewController: UIViewController, ColorPickerViewDelegate {
 To run the example project, open the `Example/Example.xcworkspace`.
 
 ## Installation
+
+### Swift Package Manager
+In Xcode 11+, Go to File > Swift Packages > Add Package Dependencies… and paste the following Git URL into the text box: 
+```
+https://github.com/culumn/ColorPicker
+```
+
 ### [CocoaPods](https://cocoapods.org)
 ColorPicker is available through [CocoaPods](https://cocoapods.org). To install it, simply add the following line to your `Podfile`:
 
