@@ -6,8 +6,6 @@
 //  Copyright © 2018年 culumn. All rights reserved.
 //
 
-import Foundation
-
 public protocol ColorPickerViewDelegate: class {
     func colorPickerWillBeginDragging(_ colorPicker: ColorPickerView)
     func colorPickerDidSelectColor(_ colorPicker: ColorPickerView)

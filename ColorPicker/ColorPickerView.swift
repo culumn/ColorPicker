@@ -6,7 +6,7 @@
 //  Copyright © 2018年 culumn. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 public class ColorPickerView: UIView {
 
